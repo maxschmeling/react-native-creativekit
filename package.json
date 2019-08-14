@@ -1,26 +1,16 @@
 {
   "name": "react-native-creativekit",
-  "version": "0.0.1",
-  "description": "Share content with Snapchat in ReactNative (iOS and Android).",
+  "version": "1.0.0-pre",
+  "description": "Share with Snapchat in ReactNative (iOS and Android).",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxschmeling/react-native-creativekit.git"
+    "url": "git+https://github.com/maxschmeling/react-native-creativekit.git",
+    "baseUrl": "https://github.com/maxschmeling/react-native-creativekit"
   },
-  "keywords": [
-    "ios",
-    "android",
-    "react-native",
-    "snapchat",
-    "snapkit"
-  ],
-  "author": "Max Schmeling <max@maxschmeling.me>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/maxschmeling/react-native-creativekit/issues"
+  "author": {
+    "name": "Max Schmeling",
+    "email": "max@maxschmling.me"
   },
-  "homepage": "https://github.com/maxschmeling/react-native-creativekit#readme"
+  "license": "MIT"
 }
