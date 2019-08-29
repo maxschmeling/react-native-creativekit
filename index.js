@@ -1,3 +1,6 @@
 const { NativeModules } = require("react-native");
 
-module.exports = { };
+const { SnapchatCreativeManager } = NativeModules;
+
+module.exports.share = SnapchatCreativeManager && SnapchatCreativeManager.share;
+
