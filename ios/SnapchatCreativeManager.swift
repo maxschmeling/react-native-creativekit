@@ -9,40 +9,37 @@ class SnapchatCreativeManager: NSObject {
   }
   
   @objc
-  func share(_ path: String, url attachmentUrl: String, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
-//    let stickerImage: UIImage = UIImage.init(contentsOfFile: path)!
+  func share(_ path: String?, url attachmentUrl: String, path videoPath: String?, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     
+    var sticker: SCSDKSnapSticker? = nil;
     
-//    let stickerImageUrl: URL = URL(string: )!;
-    
-    do {
-//    let u: URL = URL.init(string: path)!;
-//    let o: NSData.ReadingOptions = NSData.ReadingOptions.init();
-//    let d: Data = try Data.init(contentsOf: u, options: o);
-//    let image = UIImage.init(data: d);
-    
-//    let sticker = SCSDKSnapSticker(stickerImage: stickerImage);
-      let stickerImageUrl: URL = URL(string: path)!; // "https://snapchat-sticker-temp-staging.s3.amazonaws.com/i31b7fe.png")!;
+    if (path != nil) {
+      let stickerImageUrl: URL = URL(string: path!)!; // "https://snapchat-sticker-temp-staging.s3.amazonaws.com/i31b7fe.png")!;
       
-      let sticker = SCSDKSnapSticker(stickerUrl: stickerImageUrl, isAnimated: false);
-      sticker.posX = 0.5;
-      sticker.posY = 0.667;
+      sticker = SCSDKSnapSticker(stickerUrl: stickerImageUrl, isAnimated: false);
+      sticker!.posX = 0.5;
+      sticker!.posY = 0.667;
+    }
+          
+    let snap: SCSDKSnapContent;
+    
+    if (videoPath != nil) {
+      let videoUrl = URL(string: videoPath!)!;
+      let video = SCSDKSnapVideo(videoUrl: videoUrl);
       
-      let snap = SCSDKNoSnapContent()
-      snap.sticker = sticker
-      snap.attachmentUrl = attachmentUrl
-      
-      DispatchQueue.main.async {
-        self.snapAPI?.startSending(snap) { [weak self] (error: Error?) in
-          if (error != nil) {
-            reject("Error", "Unknown", error!)
-          } else {
-            resolve(nil);
-          }
-        }
+      snap = SCSDKVideoSnapContent(snapVideo: video);
+    } else {
+      snap = SCSDKNoSnapContent();
+    }
+    
+    snap.sticker = sticker
+    snap.attachmentUrl = attachmentUrl
+    
+    DispatchQueue.main.async {
+      self.snapAPI?.startSending(snap) { (error: Error?) in
+        if (error != nil) { reject("Error", "Unknown", error!) }
+        else { resolve(nil); }
       }
-    } catch {
-      
     }
   }
 }
