@@ -9,7 +9,7 @@ class SnapchatCreativeManager: NSObject {
   }
   
   @objc
-  func share(_ path: String?, url attachmentUrl: String, path videoPath: String?, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func share(_ path: String?, url attachmentUrl: String, path videoPath: String?, withCaption caption: String?, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) -> Void {
     
     var sticker: SCSDKSnapSticker? = nil;
     
@@ -32,6 +32,8 @@ class SnapchatCreativeManager: NSObject {
       snap = SCSDKNoSnapContent();
     }
     
+    snap.caption = caption
+
     snap.sticker = sticker
     snap.attachmentUrl = attachmentUrl
     
