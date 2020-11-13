@@ -30,6 +30,6 @@ Pod::Spec.new do |s|
   s.source                 = source
   s.source_files           = "ios/**/*.{h,m,swift}"
 
-  s.dependency "SnapSDK/SCSDKCreativeKit", "1.3.2"
+  s.dependency "SnapSDK/SCSDKCreativeKit", "1.6.8"
   s.dependency "React"
 end
